@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.biluo.mapper.TCustomerMapper">
 
-    <resultMap id="BaseResultMap" type="com.biluo.model.po.TCustomer">
+    <resultMap id="BaseResultMap" type="com.qq.model.po.TCustomer">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="clueId" column="clue_id" jdbcType="INTEGER"/>
             <result property="product" column="product" jdbcType="INTEGER"/>
@@ -29,7 +29,7 @@
         where  id = #{id,jdbcType=INTEGER} 
     </select>
   
-  <resultMap id="customerDtoResultMap" type="com.biluo.model.dto.CustomerDto">
+  <resultMap id="customerDtoResultMap" type="com.qq.model.dto.CustomerDto">
     <id property="id" column="id" jdbcType="INTEGER"/>
     <result property="clueId" column="clue_id" jdbcType="INTEGER"/>
     <result property="product" column="product" jdbcType="INTEGER"/>
@@ -58,7 +58,7 @@
     <result property="intentionProductName" column="intentionProductName" jdbcType="VARCHAR"/>
   </resultMap>
   
-	<select id="list" resultType="com.biluo.model.dto.CustomerDto" resultMap="customerDtoResultMap">
+	<select id="list" resultType="com.qq.model.dto.CustomerDto" resultMap="customerDtoResultMap">
     select
         tct.*,
         tc.full_name as fullName, tc.phone, tc.weixin,
@@ -85,7 +85,7 @@
     </where>
   </select>
   
-  <select id="getCustomerExcelData" resultType="com.biluo.model.dto.CustomerDto" resultMap="customerDtoResultMap">
+  <select id="getCustomerExcelData" resultType="com.qq.model.dto.CustomerDto" resultMap="customerDtoResultMap">
     select
       tct.*,
       tc.full_name as fullName, tc.phone, tc.weixin, tc.qq, tc.email, tc.age, tc.job,
@@ -127,7 +127,7 @@
         delete from t_customer
         where  id = #{id,jdbcType=INTEGER} 
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TCustomer" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TCustomer" useGeneratedKeys="true">
         insert into t_customer
         ( id,clue_id,product
         ,description,next_contact_time,create_time
@@ -138,7 +138,7 @@
         ,#{createBy,jdbcType=INTEGER},#{editTime,jdbcType=TIMESTAMP},#{editBy,jdbcType=INTEGER}
         )
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TCustomer" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TCustomer" useGeneratedKeys="true">
         insert into t_customer
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
@@ -163,7 +163,7 @@
                 <if test="editBy != null">#{editBy,jdbcType=INTEGER},</if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.biluo.model.po.TCustomer">
+    <update id="updateByPrimaryKeySelective" parameterType="com.qq.model.po.TCustomer">
         update t_customer
         <set>
                 <if test="clueId != null">
@@ -193,7 +193,7 @@
         </set>
         where   id = #{id,jdbcType=INTEGER} 
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.biluo.model.po.TCustomer">
+    <update id="updateByPrimaryKey" parameterType="com.qq.model.po.TCustomer">
         update t_customer
         set 
             clue_id =  #{clueId,jdbcType=INTEGER},

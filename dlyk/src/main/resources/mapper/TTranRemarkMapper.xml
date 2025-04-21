@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.biluo.mapper.TTranRemarkMapper">
 
-    <resultMap id="BaseResultMap" type="com.biluo.model.po.TTranRemark">
+    <resultMap id="BaseResultMap" type="com.qq.model.po.TTranRemark">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="tranId" column="tran_id" jdbcType="INTEGER"/>
             <result property="noteWay" column="note_way" jdbcType="INTEGER"/>
@@ -33,7 +33,7 @@
         delete from t_tran_remark
         where  id = #{id,jdbcType=INTEGER} 
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TTranRemark" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TTranRemark" useGeneratedKeys="true">
         insert into t_tran_remark
         ( id,tran_id,note_way
         ,note_content,create_time,create_by
@@ -44,7 +44,7 @@
         ,#{editTime,jdbcType=TIMESTAMP},#{editBy,jdbcType=INTEGER},#{deleted,jdbcType=INTEGER}
         )
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TTranRemark" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TTranRemark" useGeneratedKeys="true">
         insert into t_tran_remark
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
@@ -69,7 +69,7 @@
                 <if test="deleted != null">#{deleted,jdbcType=INTEGER},</if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.biluo.model.po.TTranRemark">
+    <update id="updateByPrimaryKeySelective" parameterType="com.qq.model.po.TTranRemark">
         update t_tran_remark
         <set>
                 <if test="tranId != null">
@@ -99,7 +99,7 @@
         </set>
         where   id = #{id,jdbcType=INTEGER} 
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.biluo.model.po.TTranRemark">
+    <update id="updateByPrimaryKey" parameterType="com.qq.model.po.TTranRemark">
         update t_tran_remark
         set 
             tran_id =  #{tranId,jdbcType=INTEGER},

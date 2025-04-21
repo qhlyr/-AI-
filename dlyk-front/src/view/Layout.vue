@@ -1,15 +1,16 @@
 <script setup>
-import { ref } from 'vue'
-import useUserStore from '../store/index.js'
-import { logoutApi } from '../api/user'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { storeToRefs } from 'pinia'
-
+import useUserStore from '../store/index.js'
+import { logoutApi } from '../api/user.js'
 
 const isCollapse = ref(false)
 const userStore = useUserStore()
+const { userInfo } = storeToRefs(userStore)
 const router = useRouter()
+
 const logout = async () => {
   await ElMessageBox.confirm('确定要退出吗？', '提示', {
     confirmButtonText: '确定',
@@ -23,9 +24,6 @@ const logout = async () => {
   })
 }
 
-// 获取菜单权限列表，需要先获取响应式的用户信息对象
-const { userInfo } = storeToRefs(userStore)
-
 const getRoutePath = (path) => {
   const pathArray = path.split('/')
   if (pathArray.length > 2) {
@@ -36,92 +34,170 @@ const getRoutePath = (path) => {
 </script>
 
 <template>
-  <div class="container">
-    <el-container>
-      <!--左侧菜单-->
-      <el-aside :width="isCollapse ? '64px' : '200px'">
-        <div class="menuTitle" @click="dashboard">@动力云客管理系统</div>
-        <el-menu
-            active-text-color="#ffd04b"
-            background-color="#334157"
-            :default-active="getRoutePath($route.path)"
-            text-color="#ffffff"
-            :unique-opened="true"
-            :collapse="isCollapse"
-            :collapse-transition="false"
-            :router="true"
-            style="border-right: 0">
+  <el-container class="layout-container">
+    <!-- 左侧导航 -->
+    <el-aside :width="isCollapse ? '64px' : '200px'" class="layout-aside">
+      <div class="aside-title" @click="router.push('/')">
+        <el-icon><Grid /></el-icon>
+        <span v-show="!isCollapse">市场调研系统</span>
+      </div>
 
-          <el-sub-menu :index="index+1" v-for="(menu, index) in userInfo.menuPermissionList" :key="menu.id">
-            <template #title>
-              <el-icon><component :is="menu.icon"></component></el-icon>
-              <span>{{menu.name}}</span>
-            </template>
-            <el-menu-item :index="subMenu.url" v-for="subMenu in menu.subPermissionList" :key="subMenu.id">
-              <el-icon><component :is="subMenu.icon"></component></el-icon>
-              {{subMenu.name}}
-            </el-menu-item>
-          </el-sub-menu>
-        </el-menu>
-      </el-aside>
+      <el-menu
+          :default-active="getRoutePath($route.path)"
+          background-color="#1f2d3d"
+          text-color="#bfcbd9"
+          active-text-color="#ffd04b"
+          :collapse="isCollapse"
+          :collapse-transition="false"
+          :unique-opened="true"
+          :router="true"
+          class="aside-menu"
+      >
+        <!-- 动态子菜单 -->
+        <el-sub-menu
+            :index="index + 1"
+            v-for="(menu, index) in userInfo.menuPermissionList"
+            :key="menu.id"
+        >
+          <template #title>
+            <el-icon><component :is="menu.icon" /></el-icon>
+            <span>{{ menu.name }}</span>
+          </template>
 
-      <!--主体-->
-      <el-container class="rightContainer">
-        <!--头部-->
-        <el-header>
-          <el-icon style="cursor: pointer" @click="isCollapse = !isCollapse"><Fold /></el-icon>
+          <el-menu-item
+              v-for="sub in menu.subPermissionList"
+              :index="sub.url"
+              :key="sub.id"
+          >
+            <el-icon><component :is="sub.icon" /></el-icon>
+            {{ sub.name }}
+          </el-menu-item>
+        </el-sub-menu>
 
-          <el-dropdown @command="handleCommand" style="float: right; line-height: 38px;">
-          <span class="el-dropdown-link">
-            {{ userStore.userInfo.name }}<el-icon class="el-icon--right"><arrow-down /></el-icon>
+        <!-- 固定菜单项 -->
+        <el-menu-item index="/chatAI">
+          <el-icon><ChatDotRound /></el-icon>
+          <span>ChatHelp</span>
+        </el-menu-item>
+        <el-menu-item index="/ChatAIMorePlatForm">
+          <el-icon><MessageBox /></el-icon>
+          <span>Chat多选择</span>
+        </el-menu-item>
+      </el-menu>
+    </el-aside>
+
+    <!-- 主体区域 -->
+    <el-container class="main-container">
+      <!-- 顶部 -->
+      <el-header class="layout-header">
+        <el-icon @click="isCollapse = !isCollapse" class="collapse-btn"><Fold /></el-icon>
+
+        <el-dropdown class="user-dropdown" trigger="click">
+          <span class="user-info">
+            {{ userStore.userInfo.name }}
+            <el-icon><ArrowDown /></el-icon>
           </span>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item command="a">我的资料</el-dropdown-item>
-                <el-dropdown-item command="b">修改密码</el-dropdown-item>
-                <el-dropdown-item command="e" divided @click="logout">退出登录</el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-        </el-header>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item>我的资料</el-dropdown-item>
+              <el-dropdown-item>修改密码</el-dropdown-item>
+              <el-dropdown-item divided @click="logout">退出登录</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </el-header>
 
-        <!--内容-->
-        <el-main>
-          <router-view />
-        </el-main>
+      <!-- 内容区 -->
+      <el-main class="layout-main">
+        <router-view />
+      </el-main>
 
-        <!--底部-->
-        <el-footer>
-          @版权所有 2022-2099 碧落 黄石市黄石港区磁湖路11号
-        </el-footer>
-      </el-container>
+      <!-- 底部 -->
+      <el-footer class="layout-footer">
+        Copyright © 2025 - 2099 市场调研系统. All Rights Reserved.
+      </el-footer>
     </el-container>
-  </div>
+  </el-container>
 </template>
 
 <style lang="scss" scoped>
-.el-aside {
-  background: black;
+.layout-container {
+  height: 100vh;
+  background-color: #f0f2f5;
 }
-.el-header {
-  background: azure;
-  height: 38px;
-  line-height: 38px;
+
+.layout-aside {
+  background: linear-gradient(to bottom, #1f2d3d, #273849);
+  transition: width 0.3s;
+  color: white;
+  .aside-title {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #fff;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    span {
+      margin-left: 10px;
+    }
+  }
 }
-.el-footer {
-  background: aliceblue;
-  height: 38px;
-  line-height: 38px;
-  text-align: center;
+
+.aside-menu {
+  border-right: none;
 }
-.rightContainer {
+
+.main-container {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
 }
-.menuTitle {
-  color: white;
-  height: 38px;
-  line-height: 38px;
+
+.layout-header {
+  height: 50px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+
+  .collapse-btn {
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+    &:hover {
+      color: #409eff;
+    }
+  }
+
+  .user-dropdown .user-info {
+    cursor: pointer;
+    font-weight: 500;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+}
+
+.layout-main {
+  padding: 20px;
+  background: #f5f7fa;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.layout-footer {
   text-align: center;
-  cursor: pointer;
+  height: 40px;
+  line-height: 40px;
+  background: #ffffff;
+  color: #666;
+  font-size: 13px;
+  border-top: 1px solid #eaeaea;
 }
 </style>

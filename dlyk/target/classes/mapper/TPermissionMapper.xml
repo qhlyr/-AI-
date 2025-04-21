@@ -4,7 +4,7 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.biluo.mapper.TPermissionMapper">
 	
-	<resultMap id="BaseResultMap" type="com.biluo.model.po.TPermission">
+	<resultMap id="BaseResultMap" type="com.qq.model.po.TPermission">
 		<id property="id" column="id" jdbcType="INTEGER" />
 		<result property="name" column="name" jdbcType="VARCHAR" />
 		<result property="code" column="code" jdbcType="VARCHAR" />
@@ -28,7 +28,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</select>
 	
-	<resultMap id="permissionResultMap" type="com.biluo.model.po.TPermission">
+	<resultMap id="permissionResultMap" type="com.qq.model.po.TPermission">
 		<id property="id" column="id" jdbcType="INTEGER" />
 		<result property="name" column="name" jdbcType="VARCHAR" />
 		<result property="code" column="code" jdbcType="VARCHAR" />
@@ -37,7 +37,7 @@
 		<result property="parentId" column="parent_id" jdbcType="INTEGER" />
 		<result property="orderNo" column="order_no" jdbcType="INTEGER" />
 		<result property="icon" column="icon" jdbcType="VARCHAR" />
-		<collection property="subPermissionList" ofType="com.biluo.model.po.TPermission">
+		<collection property="subPermissionList" ofType="com.qq.model.po.TPermission">
 			<id property="id" column="c_id" jdbcType="INTEGER" />
 			<result property="name" column="c_name" jdbcType="VARCHAR" />
 			<result property="url" column="c_url" jdbcType="VARCHAR" />
@@ -45,7 +45,7 @@
 		</collection>
 	</resultMap>
 	
-	<select id="menuListByUserId" resultType="com.biluo.model.po.TPermission" resultMap="permissionResultMap">
+	<select id="menuListByUserId" resultType="com.qq.model.po.TPermission" resultMap="permissionResultMap">
 		select tp.*,
 		       childTp.id   as c_id,
 		       childTp.name as c_name,
@@ -61,7 +61,7 @@
 			and childTp.type = 'menu'
 	</select>
 	
-	<select id="buttonListByUserId" resultType="com.biluo.model.po.TPermission" resultMap="permissionResultMap">
+	<select id="buttonListByUserId" resultType="com.qq.model.po.TPermission" resultMap="permissionResultMap">
 		select tp.*
 		from t_permission tp
 	     left join t_role_permission trp on tp.id = trp.permission_id
@@ -76,7 +76,7 @@
 		from t_permission
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
-	<insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TPermission"
+	<insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TPermission"
 	        useGeneratedKeys="true">
 		insert into t_permission
 		( id, name, code
@@ -86,7 +86,7 @@
 		       , #{url,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}
 		       , #{orderNo,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR})
 	</insert>
-	<insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TPermission"
+	<insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TPermission"
 	        useGeneratedKeys="true">
 		insert into t_permission
 		<trim prefix="(" suffix=")" suffixOverrides=",">
@@ -110,7 +110,7 @@
 			<if test="icon != null">#{icon,jdbcType=VARCHAR},</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.biluo.model.po.TPermission">
+	<update id="updateByPrimaryKeySelective" parameterType="com.qq.model.po.TPermission">
 		update t_permission
 		<set>
 			<if test="name != null">
@@ -137,7 +137,7 @@
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
-	<update id="updateByPrimaryKey" parameterType="com.biluo.model.po.TPermission">
+	<update id="updateByPrimaryKey" parameterType="com.qq.model.po.TPermission">
 		update t_permission
 		set name      = #{name,jdbcType=VARCHAR},
 		    code      = #{code,jdbcType=VARCHAR},

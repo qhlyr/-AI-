@@ -72,7 +72,18 @@ const router = createRouter({
           path: '/customer',
           name: 'customer',
           component: () => import("../view/Customer.vue")
+        },
+        {
+          path: '/chatAI',
+          name: 'chatAI',
+          component: () => import("../view/ChatAI.vue")
+        },
+        {
+          path: '/ChatAIMorePlatForm',
+          name: 'ChatAIMorePlatForm',
+          component: () => import("../view/ChatAIMorePlatForm.vue")
         }
+
       ]
     }
   ]

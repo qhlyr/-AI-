@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.biluo.mapper.TTranHistoryMapper">
 
-    <resultMap id="BaseResultMap" type="com.biluo.model.po.TTranHistory">
+    <resultMap id="BaseResultMap" type="com.qq.model.po.TTranHistory">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="tranId" column="tran_id" jdbcType="INTEGER"/>
             <result property="stage" column="stage" jdbcType="INTEGER"/>
@@ -31,7 +31,7 @@
         delete from t_tran_history
         where  id = #{id,jdbcType=INTEGER} 
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TTranHistory" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TTranHistory" useGeneratedKeys="true">
         insert into t_tran_history
         ( id,tran_id,stage
         ,money,expected_date,create_time
@@ -40,7 +40,7 @@
         ,#{money,jdbcType=DECIMAL},#{expectedDate,jdbcType=TIMESTAMP},#{createTime,jdbcType=TIMESTAMP}
         ,#{createBy,jdbcType=INTEGER})
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TTranHistory" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TTranHistory" useGeneratedKeys="true">
         insert into t_tran_history
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
@@ -61,7 +61,7 @@
                 <if test="createBy != null">#{createBy,jdbcType=INTEGER},</if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.biluo.model.po.TTranHistory">
+    <update id="updateByPrimaryKeySelective" parameterType="com.qq.model.po.TTranHistory">
         update t_tran_history
         <set>
                 <if test="tranId != null">
@@ -85,7 +85,7 @@
         </set>
         where   id = #{id,jdbcType=INTEGER} 
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.biluo.model.po.TTranHistory">
+    <update id="updateByPrimaryKey" parameterType="com.qq.model.po.TTranHistory">
         update t_tran_history
         set 
             tran_id =  #{tranId,jdbcType=INTEGER},

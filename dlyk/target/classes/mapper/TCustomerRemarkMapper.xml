@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.biluo.mapper.TCustomerRemarkMapper">
 
-    <resultMap id="BaseResultMap" type="com.biluo.model.po.TCustomerRemark">
+    <resultMap id="BaseResultMap" type="com.qq.model.po.TCustomerRemark">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="customerId" column="customer_id" jdbcType="INTEGER"/>
             <result property="noteWay" column="note_way" jdbcType="INTEGER"/>
@@ -33,7 +33,7 @@
         delete from t_customer_remark
         where  id = #{id,jdbcType=INTEGER} 
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TCustomerRemark" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TCustomerRemark" useGeneratedKeys="true">
         insert into t_customer_remark
         ( id,customer_id,note_way
         ,note_content,create_by,create_time
@@ -44,7 +44,7 @@
         ,#{editTime,jdbcType=TIMESTAMP},#{editBy,jdbcType=INTEGER},#{deleted,jdbcType=INTEGER}
         )
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TCustomerRemark" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TCustomerRemark" useGeneratedKeys="true">
         insert into t_customer_remark
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
@@ -69,7 +69,7 @@
                 <if test="deleted != null">#{deleted,jdbcType=INTEGER},</if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.biluo.model.po.TCustomerRemark">
+    <update id="updateByPrimaryKeySelective" parameterType="com.qq.model.po.TCustomerRemark">
         update t_customer_remark
         <set>
                 <if test="customerId != null">
@@ -99,7 +99,7 @@
         </set>
         where   id = #{id,jdbcType=INTEGER} 
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.biluo.model.po.TCustomerRemark">
+    <update id="updateByPrimaryKey" parameterType="com.qq.model.po.TCustomerRemark">
         update t_customer_remark
         set 
             customer_id =  #{customerId,jdbcType=INTEGER},

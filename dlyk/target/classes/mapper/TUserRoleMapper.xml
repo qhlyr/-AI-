@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.biluo.mapper.TUserRoleMapper">
 
-    <resultMap id="BaseResultMap" type="com.biluo.model.po.TUserRole">
+    <resultMap id="BaseResultMap" type="com.qq.model.po.TUserRole">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="userId" column="user_id" jdbcType="INTEGER"/>
             <result property="roleId" column="role_id" jdbcType="INTEGER"/>
@@ -25,14 +25,14 @@
         delete from t_user_role
         where  id = #{id,jdbcType=INTEGER} 
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TUserRole" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TUserRole" useGeneratedKeys="true">
         insert into t_user_role
         ( id,user_id,role_id
         )
         values (#{id,jdbcType=INTEGER},#{userId,jdbcType=INTEGER},#{roleId,jdbcType=INTEGER}
         )
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TUserRole" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TUserRole" useGeneratedKeys="true">
         insert into t_user_role
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
@@ -45,7 +45,7 @@
                 <if test="roleId != null">#{roleId,jdbcType=INTEGER},</if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.biluo.model.po.TUserRole">
+    <update id="updateByPrimaryKeySelective" parameterType="com.qq.model.po.TUserRole">
         update t_user_role
         <set>
                 <if test="userId != null">
@@ -57,7 +57,7 @@
         </set>
         where   id = #{id,jdbcType=INTEGER} 
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.biluo.model.po.TUserRole">
+    <update id="updateByPrimaryKey" parameterType="com.qq.model.po.TUserRole">
         update t_user_role
         set 
             user_id =  #{userId,jdbcType=INTEGER},

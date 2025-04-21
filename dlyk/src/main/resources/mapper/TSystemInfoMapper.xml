@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.biluo.mapper.TSystemInfoMapper">
 
-    <resultMap id="BaseResultMap" type="com.biluo.model.po.TSystemInfo">
+    <resultMap id="BaseResultMap" type="com.qq.model.po.TSystemInfo">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="systemCode" column="system_code" jdbcType="VARCHAR"/>
             <result property="name" column="name" jdbcType="VARCHAR"/>
@@ -48,7 +48,7 @@
         delete from t_system_info
         where  id = #{id,jdbcType=INTEGER} 
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TSystemInfo" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TSystemInfo" useGeneratedKeys="true">
         insert into t_system_info
         ( id,system_code,name
         ,site,logo,title
@@ -65,7 +65,7 @@
         ,#{isopen,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{createBy,jdbcType=INTEGER}
         ,#{editTime,jdbcType=TIMESTAMP},#{editBy,jdbcType=INTEGER})
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TSystemInfo" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TSystemInfo" useGeneratedKeys="true">
         insert into t_system_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
@@ -112,7 +112,7 @@
                 <if test="editBy != null">#{editBy,jdbcType=INTEGER},</if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.biluo.model.po.TSystemInfo">
+    <update id="updateByPrimaryKeySelective" parameterType="com.qq.model.po.TSystemInfo">
         update t_system_info
         <set>
                 <if test="systemCode != null">
@@ -175,7 +175,7 @@
         </set>
         where   id = #{id,jdbcType=INTEGER} 
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.biluo.model.po.TSystemInfo">
+    <update id="updateByPrimaryKey" parameterType="com.qq.model.po.TSystemInfo">
         update t_system_info
         set 
             system_code =  #{systemCode,jdbcType=VARCHAR},

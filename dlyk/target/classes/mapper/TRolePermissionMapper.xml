@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.biluo.mapper.TRolePermissionMapper">
 
-    <resultMap id="BaseResultMap" type="com.biluo.model.po.TRolePermission">
+    <resultMap id="BaseResultMap" type="com.qq.model.po.TRolePermission">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="roleId" column="role_id" jdbcType="INTEGER"/>
             <result property="permissionId" column="permission_id" jdbcType="INTEGER"/>
@@ -25,14 +25,14 @@
         delete from t_role_permission
         where  id = #{id,jdbcType=INTEGER} 
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TRolePermission" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TRolePermission" useGeneratedKeys="true">
         insert into t_role_permission
         ( id,role_id,permission_id
         )
         values (#{id,jdbcType=INTEGER},#{roleId,jdbcType=INTEGER},#{permissionId,jdbcType=INTEGER}
         )
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TRolePermission" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TRolePermission" useGeneratedKeys="true">
         insert into t_role_permission
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
@@ -45,7 +45,7 @@
                 <if test="permissionId != null">#{permissionId,jdbcType=INTEGER},</if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.biluo.model.po.TRolePermission">
+    <update id="updateByPrimaryKeySelective" parameterType="com.qq.model.po.TRolePermission">
         update t_role_permission
         <set>
                 <if test="roleId != null">
@@ -57,7 +57,7 @@
         </set>
         where   id = #{id,jdbcType=INTEGER} 
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.biluo.model.po.TRolePermission">
+    <update id="updateByPrimaryKey" parameterType="com.qq.model.po.TRolePermission">
         update t_role_permission
         set 
             role_id =  #{roleId,jdbcType=INTEGER},

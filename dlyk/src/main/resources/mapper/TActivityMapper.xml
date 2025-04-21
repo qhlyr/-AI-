@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.biluo.mapper.TActivityMapper">
 
-    <resultMap id="BaseResultMap" type="com.biluo.model.po.TActivity">
+    <resultMap id="BaseResultMap" type="com.qq.model.po.TActivity">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="ownerId" column="owner_id" jdbcType="INTEGER"/>
             <result property="name" column="name" jdbcType="VARCHAR"/>
@@ -32,14 +32,14 @@
 	    where id = #{id,jdbcType=INTEGER}
     </select>
 
-  <select id="listByUserId" resultType="com.biluo.model.po.TActivity"  resultMap="BaseResultMap">
+  <select id="listByUserId" resultType="com.qq.model.po.TActivity" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from t_activity
     where owner_id = #{userId}
   </select>
 
-  <select id="listByUserIds" resultType="com.biluo.model.po.TActivity" resultMap="BaseResultMap">
+  <select id="listByUserIds" resultType="com.qq.model.po.TActivity" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from t_activity
@@ -49,7 +49,7 @@
     </foreach>
   </select>
 
-  <resultMap id="activityDtoResultMap" type="com.biluo.model.dto.ActivityDto">
+  <resultMap id="activityDtoResultMap" type="com.qq.model.dto.ActivityDto">
     <id property="id" column="id" jdbcType="INTEGER"/>
     <result property="ownerId" column="owner_id" jdbcType="INTEGER"/>
     <result property="ownerName" column="ownerName" jdbcType="VARCHAR"/>
@@ -66,7 +66,7 @@
     <result property="editName" column="editName" jdbcType="VARCHAR"/>
   </resultMap>
 
-	<select id="list" resultType="com.biluo.model.dto.ActivityDto" resultMap="activityDtoResultMap">
+	<select id="list" resultType="com.qq.model.dto.ActivityDto" resultMap="activityDtoResultMap">
 		select
 		ta.*,
 		tu.name as ownerName
@@ -94,7 +94,7 @@
 		</where>
 	</select>
   
-  <select id="getActivityDetail" resultType="com.biluo.model.dto.ActivityDto" resultMap="activityDtoResultMap">
+  <select id="getActivityDetail" resultType="com.qq.model.dto.ActivityDto" resultMap="activityDtoResultMap">
     select
       ta.*,
       tu1.name as ownerName,
@@ -107,7 +107,7 @@
     where ta.id = #{id}
   </select>
   
-	<select id="getOngoingActivityList" resultType="com.biluo.model.po.TActivity" resultMap="BaseResultMap">
+	<select id="getOngoingActivityList" resultType="com.qq.model.po.TActivity" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from t_activity
@@ -122,7 +122,7 @@
         delete from t_activity
         where  id = #{id,jdbcType=INTEGER} 
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TActivity" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TActivity" useGeneratedKeys="true">
         insert into t_activity
         ( id,owner_id,name
         ,start_time,end_time,cost
@@ -133,7 +133,7 @@
         ,#{description,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{createBy,jdbcType=INTEGER}
         ,#{editTime,jdbcType=TIMESTAMP},#{editBy,jdbcType=INTEGER})
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TActivity" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TActivity" useGeneratedKeys="true">
         insert into t_activity
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
@@ -162,7 +162,7 @@
                 <if test="editBy != null">#{editBy,jdbcType=INTEGER},</if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.biluo.model.po.TActivity">
+    <update id="updateByPrimaryKeySelective" parameterType="com.qq.model.po.TActivity">
         update t_activity
         <set>
                 <if test="ownerId != null">
@@ -198,7 +198,7 @@
         </set>
         where   id = #{id,jdbcType=INTEGER} 
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.biluo.model.po.TActivity">
+    <update id="updateByPrimaryKey" parameterType="com.qq.model.po.TActivity">
         update t_activity
         set 
             owner_id =  #{ownerId,jdbcType=INTEGER},

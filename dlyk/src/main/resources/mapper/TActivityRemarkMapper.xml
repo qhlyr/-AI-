@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.biluo.mapper.TActivityRemarkMapper">
 
-    <resultMap id="BaseResultMap" type="com.biluo.model.po.TActivityRemark">
+    <resultMap id="BaseResultMap" type="com.qq.model.po.TActivityRemark">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="activityId" column="activity_id" jdbcType="INTEGER"/>
             <result property="noteContent" column="note_content" jdbcType="VARCHAR"/>
@@ -28,7 +28,7 @@
         where  id = #{id,jdbcType=INTEGER} 
     </select>
   
-  <resultMap id="remarkDtoResultMap" type="com.biluo.model.dto.ActivityRemarkDto">
+  <resultMap id="remarkDtoResultMap" type="com.qq.model.dto.ActivityRemarkDto">
     <id property="id" column="id" jdbcType="INTEGER"/>
     <result property="activityId" column="activity_id" jdbcType="INTEGER"/>
     <result property="noteContent" column="note_content" jdbcType="VARCHAR"/>
@@ -41,7 +41,7 @@
     <result property="deleted" column="deleted" jdbcType="INTEGER"/>
   </resultMap>
   
-	<select id="getRemarkList" resultType="com.biluo.model.dto.ActivityRemarkDto" resultMap="remarkDtoResultMap">
+	<select id="getRemarkList" resultType="com.qq.model.dto.ActivityRemarkDto" resultMap="remarkDtoResultMap">
     select
         tar.*,
         tu1.name createName,
@@ -60,7 +60,7 @@
         delete from t_activity_remark
         where  id = #{id,jdbcType=INTEGER} 
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TActivityRemark" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TActivityRemark" useGeneratedKeys="true">
         insert into t_activity_remark
         ( id,activity_id,note_content
         ,create_time,create_by,edit_time
@@ -69,7 +69,7 @@
         ,#{createTime,jdbcType=TIMESTAMP},#{createBy,jdbcType=INTEGER},#{editTime,jdbcType=TIMESTAMP}
         ,#{editBy,jdbcType=INTEGER},#{deleted,jdbcType=INTEGER})
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TActivityRemark" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TActivityRemark" useGeneratedKeys="true">
         insert into t_activity_remark
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
@@ -92,7 +92,7 @@
                 <if test="deleted != null">#{deleted,jdbcType=INTEGER},</if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.biluo.model.po.TActivityRemark">
+    <update id="updateByPrimaryKeySelective" parameterType="com.qq.model.po.TActivityRemark">
         update t_activity_remark
         <set>
                 <if test="activityId != null">
@@ -119,7 +119,7 @@
         </set>
         where   id = #{id,jdbcType=INTEGER} 
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.biluo.model.po.TActivityRemark">
+    <update id="updateByPrimaryKey" parameterType="com.qq.model.po.TActivityRemark">
         update t_activity_remark
         set 
             activity_id =  #{activityId,jdbcType=INTEGER},

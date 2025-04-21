@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.biluo.mapper.TUserMapper">
 
-    <resultMap id="BaseResultMap" type="com.biluo.model.po.TUser">
+    <resultMap id="BaseResultMap" type="com.qq.model.po.TUser">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="loginAct" column="login_act" jdbcType="VARCHAR"/>
             <result property="loginPwd" column="login_pwd" jdbcType="VARCHAR"/>
@@ -44,7 +44,7 @@
     where  login_act = #{username}
   </select>
 
-  <select id="list" resultType="com.biluo.model.po.TUser" resultMap="BaseResultMap">
+  <select id="list" resultType="com.qq.model.po.TUser" resultMap="BaseResultMap">
     select
       id,login_act,
       name,phone,email,
@@ -57,7 +57,7 @@
     </where>
   </select>
 
-  <resultMap id="userDtoResultMap" type="com.biluo.model.dto.UserDto">
+  <resultMap id="userDtoResultMap" type="com.qq.model.dto.UserDto">
     <id property="id" column="id" jdbcType="INTEGER"/>
     <result property="loginAct" column="login_act" jdbcType="VARCHAR"/>
     <result property="name" column="name" jdbcType="VARCHAR"/>
@@ -78,7 +78,7 @@
     <result property="editName" column="editByName" jdbcType="VARCHAR"/>
   </resultMap>
 
-  <select id="getUserDetail" resultType="com.biluo.model.po.TUser" resultMap="userDtoResultMap">
+  <select id="getUserDetail" resultType="com.qq.model.po.TUser" resultMap="userDtoResultMap">
     select
       tu1.*,
       tu2.id createById,
@@ -93,7 +93,7 @@
       tu1.id = #{id}
   </select>
 
-  <select id="getAllUser" resultType="com.biluo.model.po.TUser" resultMap="BaseResultMap">
+  <select id="getAllUser" resultType="com.qq.model.po.TUser" resultMap="BaseResultMap">
       select
           id, name
       from t_user
@@ -112,7 +112,7 @@
     </foreach>
   </delete>
 
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TUser" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TUser" useGeneratedKeys="true">
         insert into t_user
         ( id,login_act,login_pwd
         ,name,phone,email
@@ -127,7 +127,7 @@
         ,#{editTime,jdbcType=TIMESTAMP},#{editBy,jdbcType=INTEGER},#{lastLoginTime,jdbcType=TIMESTAMP}
         )
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TUser" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TUser" useGeneratedKeys="true">
         insert into t_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
@@ -164,7 +164,7 @@
                 <if test="lastLoginTime != null">#{lastLoginTime,jdbcType=TIMESTAMP},</if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.biluo.model.po.TUser">
+    <update id="updateByPrimaryKeySelective" parameterType="com.qq.model.po.TUser">
         update t_user
         <set>
                 <if test="loginAct != null">
@@ -212,7 +212,7 @@
         </set>
         where   id = #{id,jdbcType=INTEGER} 
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.biluo.model.po.TUser">
+    <update id="updateByPrimaryKey" parameterType="com.qq.model.po.TUser">
         update t_user
         set 
             login_act =  #{loginAct,jdbcType=VARCHAR},

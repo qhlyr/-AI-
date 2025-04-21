@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.biluo.mapper.TProductMapper">
 
-    <resultMap id="BaseResultMap" type="com.biluo.model.po.TProduct">
+    <resultMap id="BaseResultMap" type="com.qq.model.po.TProduct">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="name" column="name" jdbcType="VARCHAR"/>
             <result property="guidePriceS" column="guide_price_s" jdbcType="DECIMAL"/>
@@ -31,7 +31,7 @@
         where  id = #{id,jdbcType=INTEGER} 
     </select>
   
-	<select id="selectAllOnSaleProduct" resultType="com.biluo.model.po.TProduct" resultMap="BaseResultMap">
+	<select id="selectAllOnSaleProduct" resultType="com.qq.model.po.TProduct" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from t_product
@@ -42,7 +42,7 @@
         delete from t_product
         where  id = #{id,jdbcType=INTEGER} 
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TProduct" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TProduct" useGeneratedKeys="true">
         insert into t_product
         ( id,name,guide_price_s
         ,guide_price_e,quotation,state
@@ -53,7 +53,7 @@
         ,#{createTime,jdbcType=TIMESTAMP},#{createBy,jdbcType=INTEGER},#{editTime,jdbcType=TIMESTAMP}
         ,#{editBy,jdbcType=INTEGER})
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TProduct" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TProduct" useGeneratedKeys="true">
         insert into t_product
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
@@ -80,7 +80,7 @@
                 <if test="editBy != null">#{editBy,jdbcType=INTEGER},</if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.biluo.model.po.TProduct">
+    <update id="updateByPrimaryKeySelective" parameterType="com.qq.model.po.TProduct">
         update t_product
         <set>
                 <if test="name != null">
@@ -113,7 +113,7 @@
         </set>
         where   id = #{id,jdbcType=INTEGER} 
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.biluo.model.po.TProduct">
+    <update id="updateByPrimaryKey" parameterType="com.qq.model.po.TProduct">
         update t_product
         set 
             name =  #{name,jdbcType=VARCHAR},

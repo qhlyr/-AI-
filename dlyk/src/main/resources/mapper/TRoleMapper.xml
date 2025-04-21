@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.biluo.mapper.TRoleMapper">
 
-    <resultMap id="BaseResultMap" type="com.biluo.model.po.TRole">
+    <resultMap id="BaseResultMap" type="com.qq.model.po.TRole">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="role" column="role" jdbcType="VARCHAR"/>
             <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
@@ -21,7 +21,7 @@
         where  id = #{id,jdbcType=INTEGER} 
     </select>
 
-  <select id="listByUserId" resultType="com.biluo.model.po.TRole">
+  <select id="listByUserId" resultType="com.qq.model.po.TRole">
     select
       tr.*
     from t_role tr left join t_user_role tur on tr.id = tur.role_id
@@ -32,14 +32,14 @@
         delete from t_role
         where  id = #{id,jdbcType=INTEGER} 
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TRole" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TRole" useGeneratedKeys="true">
         insert into t_role
         ( id,role,role_name
         )
         values (#{id,jdbcType=INTEGER},#{role,jdbcType=VARCHAR},#{roleName,jdbcType=VARCHAR}
         )
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TRole" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TRole" useGeneratedKeys="true">
         insert into t_role
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
@@ -52,7 +52,7 @@
                 <if test="roleName != null">#{roleName,jdbcType=VARCHAR},</if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.biluo.model.po.TRole">
+    <update id="updateByPrimaryKeySelective" parameterType="com.qq.model.po.TRole">
         update t_role
         <set>
                 <if test="role != null">
@@ -64,7 +64,7 @@
         </set>
         where   id = #{id,jdbcType=INTEGER} 
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.biluo.model.po.TRole">
+    <update id="updateByPrimaryKey" parameterType="com.qq.model.po.TRole">
         update t_role
         set 
             role =  #{role,jdbcType=VARCHAR},

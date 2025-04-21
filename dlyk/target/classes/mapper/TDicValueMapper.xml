@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.biluo.mapper.TDicValueMapper">
 
-    <resultMap id="BaseResultMap" type="com.biluo.model.po.TDicValue">
+    <resultMap id="BaseResultMap" type="com.qq.model.po.TDicValue">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="typeCode" column="type_code" jdbcType="VARCHAR"/>
             <result property="typeValue" column="type_value" jdbcType="VARCHAR"/>
@@ -28,14 +28,14 @@
         delete from t_dic_value
         where  id = #{id,jdbcType=INTEGER} 
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TDicValue" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TDicValue" useGeneratedKeys="true">
         insert into t_dic_value
         ( id,type_code,type_value
         ,order,remark)
         values (#{id,jdbcType=INTEGER},#{typeCode,jdbcType=VARCHAR},#{typeValue,jdbcType=VARCHAR}
         ,#{order,jdbcType=INTEGER},#{remark,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TDicValue" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TDicValue" useGeneratedKeys="true">
         insert into t_dic_value
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
@@ -52,7 +52,7 @@
                 <if test="remark != null">#{remark,jdbcType=VARCHAR},</if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.biluo.model.po.TDicValue">
+    <update id="updateByPrimaryKeySelective" parameterType="com.qq.model.po.TDicValue">
         update t_dic_value
         <set>
                 <if test="typeCode != null">
@@ -70,7 +70,7 @@
         </set>
         where   id = #{id,jdbcType=INTEGER} 
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.biluo.model.po.TDicValue">
+    <update id="updateByPrimaryKey" parameterType="com.qq.model.po.TDicValue">
         update t_dic_value
         set 
             type_code =  #{typeCode,jdbcType=VARCHAR},

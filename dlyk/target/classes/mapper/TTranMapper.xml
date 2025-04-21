@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.biluo.mapper.TTranMapper">
 
-    <resultMap id="BaseResultMap" type="com.biluo.model.po.TTran">
+    <resultMap id="BaseResultMap" type="com.qq.model.po.TTran">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="tranNo" column="tran_no" jdbcType="VARCHAR"/>
             <result property="customerId" column="customer_id" jdbcType="INTEGER"/>
@@ -56,7 +56,7 @@
         delete from t_tran
         where  id = #{id,jdbcType=INTEGER} 
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TTran" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TTran" useGeneratedKeys="true">
         insert into t_tran
         ( id,tran_no,customer_id
         ,money,expected_date,stage
@@ -69,7 +69,7 @@
         ,#{createBy,jdbcType=INTEGER},#{editTime,jdbcType=TIMESTAMP},#{editBy,jdbcType=INTEGER}
         )
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.biluo.model.po.TTran" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.qq.model.po.TTran" useGeneratedKeys="true">
         insert into t_tran
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
@@ -100,7 +100,7 @@
                 <if test="editBy != null">#{editBy,jdbcType=INTEGER},</if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.biluo.model.po.TTran">
+    <update id="updateByPrimaryKeySelective" parameterType="com.qq.model.po.TTran">
         update t_tran
         <set>
                 <if test="tranNo != null">
@@ -139,7 +139,7 @@
         </set>
         where   id = #{id,jdbcType=INTEGER} 
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.biluo.model.po.TTran">
+    <update id="updateByPrimaryKey" parameterType="com.qq.model.po.TTran">
         update t_tran
         set 
             tran_no =  #{tranNo,jdbcType=VARCHAR},

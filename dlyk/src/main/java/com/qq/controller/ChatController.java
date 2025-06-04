@@ -79,10 +79,7 @@ public class ChatController {
                 SearchRequest.builder()
                         .query(query)
                         .topK(3)
-                        //.filterExpression("sessionId == 'session-0'")
-
-
-
+                        .filterExpression("sessionId == '" + sessionId + "'")
                         .build()
         );
 
